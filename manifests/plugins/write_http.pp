@@ -6,6 +6,7 @@ class collectd::plugins::write_http(
   $write_http_buffersize             = $collectd::write_http_buffersize,
   $write_http_flush_interval         = $collectd::write_http_flush_interval,
   $write_http_log_http_error         = $collectd::write_http_log_http_error,
+  $package_ensure                    = present,
 ) inherits collectd {
 
   $dimensions = get_dimensions($dimension_list, $aws_integration)
@@ -13,8 +14,9 @@ class collectd::plugins::write_http(
 
   if $::osfamily == 'Redhat' {
     collectd::check_and_install_package { $title :
-      package_name => 'collectd-write_http',
-      before       => File['load write_http plugin']
+      package_name   => 'collectd-write_http',
+      package_ensure => $package_ensure,
+      before         => File['load write_http plugin']
     }
   }
 
