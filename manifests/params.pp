@@ -13,6 +13,7 @@ class collectd::params {
         $log_level              = 'info'
         $loadplugins            = {}
         $ensure_signalfx_plugin_version = present
+        $manage_service            = true
         $dimension_list            = {}
         $signalfx_api_endpoint     = 'https://ingest.signalfx.com/v1/collectd'
         $write_http_timeout        = 3000
